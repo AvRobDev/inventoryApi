@@ -6,6 +6,6 @@ services:
     startCommand: node app.js
     envVars:
       - key: MONGODB_URI
-        value: mongodb+srv://Rober:<db_password>@cluster0.nem1k7f.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+        value: mongodb+srv://Rober:RobDev300804@cluster0.nem1k7f.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
       - key: PORT
         value: 10000 # Render asigna un puerto automático, pero puedes dejarlo así

@@ -16,8 +16,8 @@ const Producto = require('../models/producto');
  *     Producto:
  *       type: object
  *       required:
- *         - nombre
- *         - precio
+ *         - name
+ *         - price
  *       properties:
  *         id:
  *           type: string
@@ -30,7 +30,7 @@ const Producto = require('../models/producto');
  *           type: number
  *           format: float
  *           description: Precio del producto
- *           example: 89.99
+ *           example: 2600
  *         quantity:
  *           type: integer
  *           description: Cantidad en inventario

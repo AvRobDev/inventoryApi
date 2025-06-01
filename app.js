@@ -31,27 +31,6 @@ const swaggerOptions = {
         description: 'Servidor de producción'
       }
     ],
-    components: {
-      schemas: {
-        Producto: {
-          type: 'object',
-          properties: {
-            nombre: {
-              type: 'string',
-              example: 'Teclado mecánico'
-            },
-            precio: {
-              type: 'number',
-              example: 89.99
-            },
-            stock: {
-              type: 'number',
-              example: 15
-            }
-          }
-        }
-      }
-    }
   },
   apis: ['./routes/*.js'] // Ruta a tus archivos de rutas
 };

@@ -22,19 +22,23 @@ const Producto = require('../models/producto');
  *         id:
  *           type: string
  *           description: ID autogenerado del producto
- *         nombre:
+ *         name:
  *           type: string
  *           description: Nombre del producto
  *           example: "Teclado mecánico"
- *         precio:
+ *         price:
  *           type: number
  *           format: float
  *           description: Precio del producto
  *           example: 89.99
- *         stock:
+ *         quantity:
  *           type: integer
  *           description: Cantidad en inventario
  *           example: 15
+ *         brand:
+ *           type: string
+ *           description: Marca del producto
+ *           example: "Magik"
  *         createdAt:
  *           type: string
  *           format: date-time

@@ -1,9 +1,76 @@
-// routes/productos.js
 const express = require('express');
 const router = express.Router();
 const Producto = require('../models/producto');
 
-// CREATE (POST) - Crear un producto
+/**
+ * @swagger
+ * tags:
+ *   name: Productos
+ *   description: API para gestión de productos
+ */
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Producto:
+ *       type: object
+ *       required:
+ *         - nombre
+ *         - precio
+ *       properties:
+ *         id:
+ *           type: string
+ *           description: ID autogenerado del producto
+ *         nombre:
+ *           type: string
+ *           description: Nombre del producto
+ *           example: "Teclado mecánico"
+ *         precio:
+ *           type: number
+ *           format: float
+ *           description: Precio del producto
+ *           example: 89.99
+ *         stock:
+ *           type: integer
+ *           description: Cantidad en inventario
+ *           example: 15
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *           description: Fecha de creación
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *           description: Fecha de última actualización
+ */
+
+/**
+ * @swagger
+ * /api/productos:
+ *   post:
+ *     summary: Crear un nuevo producto
+ *     tags: [Productos]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Producto'
+ *     responses:
+ *       201:
+ *         description: Producto creado exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Producto'
+ *       400:
+ *         description: Datos de entrada inválidos
+ *         content:
+ *           application/json:
+ *             example:
+ *               error: "Mensaje de error específico"
+ */
 router.post('/', async (req, res) => {
   try {
     const producto = new Producto(req.body);
@@ -14,7 +81,24 @@ router.post('/', async (req, res) => {
   }
 });
 
-// READ (GET) - Obtener todos los productos
+/**
+ * @swagger
+ * /api/productos:
+ *   get:
+ *     summary: Obtener todos los productos
+ *     tags: [Productos]
+ *     responses:
+ *       200:
+ *         description: Lista de productos
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Producto'
+ *       500:
+ *         description: Error del servidor
+ */
 router.get('/', async (req, res) => {
   try {
     const productos = await Producto.find();
@@ -24,7 +108,31 @@ router.get('/', async (req, res) => {
   }
 });
 
-// READ (GET) - Obtener un producto por ID
+/**
+ * @swagger
+ * /api/productos/{id}:
+ *   get:
+ *     summary: Obtener un producto por ID
+ *     tags: [Productos]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID del producto
+ *     responses:
+ *       200:
+ *         description: Producto encontrado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Producto'
+ *       404:
+ *         description: Producto no encontrado
+ *       500:
+ *         description: Error del servidor
+ */
 router.get('/:id', async (req, res) => {
   try {
     const producto = await Producto.findById(req.params.id);
@@ -35,7 +143,37 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// UPDATE (PUT) - Actualizar un producto
+/**
+ * @swagger
+ * /api/productos/{id}:
+ *   put:
+ *     summary: Actualizar un producto
+ *     tags: [Productos]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID del producto a actualizar
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Producto'
+ *     responses:
+ *       200:
+ *         description: Producto actualizado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Producto'
+ *       400:
+ *         description: Datos inválidos
+ *       404:
+ *         description: Producto no encontrado
+ */
 router.put('/:id', async (req, res) => {
   try {
     const producto = await Producto.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -46,7 +184,31 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// DELETE (DELETE) - Eliminar un producto
+/**
+ * @swagger
+ * /api/productos/{id}:
+ *   delete:
+ *     summary: Eliminar un producto
+ *     tags: [Productos]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID del producto a eliminar
+ *     responses:
+ *       200:
+ *         description: Producto eliminado
+ *         content:
+ *           application/json:
+ *             example:
+ *               message: "Producto eliminado"
+ *       404:
+ *         description: Producto no encontrado
+ *       500:
+ *         description: Error del servidor
+ */
 router.delete('/:id', async (req, res) => {
   try {
     const producto = await Producto.findByIdAndDelete(req.params.id);
